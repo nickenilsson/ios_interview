@@ -43,7 +43,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     init(viewModel: ListViewControllerViewModel) {
         self.cancellables = []
-        self.listItems = viewModel.listItems
         self.viewModel = viewModel
         
         self.tableView = UITableView()
@@ -57,6 +56,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.register(ListViewControllerCell.self, forCellReuseIdentifier: "\(ListViewControllerCell.self)")
         
+        self.listItems = viewModel.listItems
         viewModel.listItemsPublisher.sink { listItems in
             guard !listItems.isEmpty else { return }
             self.listItems = listItems
