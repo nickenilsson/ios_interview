@@ -44,11 +44,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     init(viewModel: ListViewControllerViewModel) {
         self.cancellables = []
         self.viewModel = viewModel
+        self.listItems = viewModel.listItems
         
         self.tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(nibName: nil, bundle: nil)
+        
         tableView.estimatedRowHeight = 100
         tableView.dataSource = self
         tableView.delegate = self
@@ -56,7 +58,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.register(ListViewControllerCell.self, forCellReuseIdentifier: "\(ListViewControllerCell.self)")
         
-        self.listItems = viewModel.listItems
         viewModel.listItemsPublisher.sink { listItems in
             guard !listItems.isEmpty else { return }
             self.listItems = listItems
