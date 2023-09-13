@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A1E12AF292CD5CC007BADC3 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12AE292CD5CC007BADC3 /* Fetcher.swift */; };
 		6A1E12B1292CD622007BADC3 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B0292CD622007BADC3 /* EpisodeModel.swift */; };
-		6A1E12B3292CDA00007BADC3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B2292CDA00007BADC3 /* ListViewController.swift */; };
-		6A1E12B5292CDF14007BADC3 /* ListItemViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B4292CDF14007BADC3 /* ListItemViewControllerViewModel.swift */; };
+		6A1E12B3292CDA00007BADC3 /* EpisodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B2292CDA00007BADC3 /* EpisodeListViewController.swift */; };
 		6A1E12B7292CE1A2007BADC3 /* ListViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B6292CE1A2007BADC3 /* ListViewControllerCell.swift */; };
 		6A1E12BA292CEA79007BADC3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12B9292CEA79007BADC3 /* DetailViewController.swift */; };
 		6A1E12BD292CFDD6007BADC3 /* DetailViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E12BC292CFDD6007BADC3 /* DetailViewControllerViewModel.swift */; };
@@ -44,8 +43,7 @@
 /* Begin PBXFileReference section */
 		6A1E12AE292CD5CC007BADC3 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		6A1E12B0292CD622007BADC3 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
-		6A1E12B2292CDA00007BADC3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		6A1E12B4292CDF14007BADC3 /* ListItemViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewControllerViewModel.swift; sourceTree = "<group>"; };
+		6A1E12B2292CDA00007BADC3 /* EpisodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListViewController.swift; sourceTree = "<group>"; };
 		6A1E12B6292CE1A2007BADC3 /* ListViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerCell.swift; sourceTree = "<group>"; };
 		6A1E12B9292CEA79007BADC3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		6A1E12BC292CFDD6007BADC3 /* DetailViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerViewModel.swift; sourceTree = "<group>"; };
@@ -91,8 +89,7 @@
 		6A1E12B8292CE1B6007BADC3 /* ListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A1E12B2292CDA00007BADC3 /* ListViewController.swift */,
-				6A1E12B4292CDF14007BADC3 /* ListItemViewControllerViewModel.swift */,
+				6A1E12B2292CDA00007BADC3 /* EpisodeListViewController.swift */,
 				6A1E12B6292CE1A2007BADC3 /* ListViewControllerCell.swift */,
 			);
 			path = ListViewController;
@@ -302,9 +299,8 @@
 				6A1E12BD292CFDD6007BADC3 /* DetailViewControllerViewModel.swift in Sources */,
 				6A2E64DE292CCE0E00DB33E9 /* AppDelegate.swift in Sources */,
 				6A1E12B7292CE1A2007BADC3 /* ListViewControllerCell.swift in Sources */,
-				6A1E12B3292CDA00007BADC3 /* ListViewController.swift in Sources */,
+				6A1E12B3292CDA00007BADC3 /* EpisodeListViewController.swift in Sources */,
 				6A1E12C02935F1EE007BADC3 /* UIImageView+loadFromURL.swift in Sources */,
-				6A1E12B5292CDF14007BADC3 /* ListItemViewControllerViewModel.swift in Sources */,
 				6A2E64E0292CCE0E00DB33E9 /* SceneDelegate.swift in Sources */,
 				6A1E12AF292CD5CC007BADC3 /* Fetcher.swift in Sources */,
 				6A1E12B1292CD622007BADC3 /* EpisodeModel.swift in Sources */,

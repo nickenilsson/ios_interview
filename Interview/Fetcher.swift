@@ -8,8 +8,9 @@
 import Foundation
 import Combine
 
+// Mockad api-klient. Inte en del av "testet"
 class Fetcher {
-    
+
     static let shared: Fetcher = Fetcher()
     
     private let urlSession: URLSession = .shared

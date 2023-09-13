@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        let listViewControllerViewModel = ListViewControllerViewModel()
-        let navigationController = UINavigationController(rootViewController: ListViewController(viewModel: listViewControllerViewModel))
+        
+        let navigationController = UINavigationController(rootViewController: EpisodeListViewController())
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

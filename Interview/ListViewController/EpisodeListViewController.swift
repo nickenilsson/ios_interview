@@ -18,6 +18,7 @@ class ListItem {
     }
     
     var title: String { episode.name! }
+    
     var imageUrl: URL? {
         if let imageUrlString = episode.imageUrl {
             return URL(string: imageUrlString)
@@ -31,23 +32,20 @@ class ListItem {
 }
 
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EpisodeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    let fetcher: Fetcher = Fetcher.shared
     
     var cancellables: Set<AnyCancellable>
     
     let tableView: UITableView
     
-    var listItems: [ListItem]
+    var listItems: [ListItem]?
     
-    let viewModel: ListViewControllerViewModel
-    
-    init(viewModel: ListViewControllerViewModel) {
+    init() {
         self.cancellables = []
-        self.viewModel = viewModel
-        self.listItems = viewModel.listItems
         
         self.tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(nibName: nil, bundle: nil)
         
@@ -58,11 +56,21 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.register(ListViewControllerCell.self, forCellReuseIdentifier: "\(ListViewControllerCell.self)")
         
-        viewModel.listItemsPublisher.sink { listItems in
-            guard !listItems.isEmpty else { return }
-            self.listItems = listItems
-            self.tableView.reloadData()
-        }.store(in: &cancellables)
+        fetcher.getPopularEpisodes().sink { popularEpisodes in
+            switch popularEpisodes {
+            case .success(let episodeModels):
+                self.listItems = []
+                for episode in episodeModels {
+                    let listItem = ListItem(episode: episode)
+                    self.listItems?.append(listItem)
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("### Error happened")
+            }
+        }
+        .store(in: &cancellables)
+        
     }
     
     override func loadView() {
@@ -76,12 +84,15 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationController?.navigationBar.prefersLargeTitles = true
         
         view.addSubview(tableView)
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         super.viewDidLoad()
     }
     
@@ -98,7 +109,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return UITableViewCell()
         }
         
-        let listItem = listItems[indexPath.item]
+        let listItem = listItems![indexPath.item]
+        
         cell.titleLabel.text = listItem.title
         
         if let description = listItem.description {
@@ -114,11 +126,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listItems.count
+        return listItems!.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let listItem = listItems[indexPath.item]
+        let listItem = listItems![indexPath.item]
         let detailViewControllerViewModel = DetailViewControllerViewModel(episodeId: listItem.episode.id)
         let detailViewController = DetailViewController(viewModel: detailViewControllerViewModel)
         navigationController?.pushViewController(detailViewController, animated: true)

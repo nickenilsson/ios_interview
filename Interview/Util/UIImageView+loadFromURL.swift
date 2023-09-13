@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Superbasic bildhämtning. Inte en del av "testet"
 extension UIImageView {
     func load(from url: URL) {
         DispatchQueue.global().async { [weak self] in
