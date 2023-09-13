@@ -17,10 +17,10 @@ class ListItem {
         self.episode = episode
     }
     
-    var title: String { episode.name! }
+    var title: String { episode.name! } // 🧐
     
     var imageUrl: URL? {
-        if let imageUrlString = episode.imageUrl {
+        if let imageUrlString = episode.imageUrl { // 🧐
             return URL(string: imageUrlString)
         }
         return nil
@@ -34,12 +34,14 @@ class ListItem {
 
 class EpisodeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // 🧐
     let fetcher: Fetcher = Fetcher.shared
     
     var cancellables: Set<AnyCancellable>
     
     let tableView: UITableView
     
+    // 🧐
     var listItems: [ListItem]?
     
     init() {
@@ -56,9 +58,11 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
         
         tableView.register(ListViewControllerCell.self, forCellReuseIdentifier: "\(ListViewControllerCell.self)")
         
+        // 🧐
         fetcher.getPopularEpisodes().sink { popularEpisodes in
             switch popularEpisodes {
             case .success(let episodeModels):
+                // 🧐
                 self.listItems = []
                 for episode in episodeModels {
                     let listItem = ListItem(episode: episode)
@@ -66,6 +70,7 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
                     self.tableView.reloadData()
                 }
             case .failure(let error):
+                // 🧐
                 print("### Error happened")
             }
         }
@@ -85,6 +90,7 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
         
         view.addSubview(tableView)
         
+        // 🧐
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -106,9 +112,11 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(ListViewControllerCell.self)", for: indexPath) as? ListViewControllerCell else {
+            // 🧐
             return UITableViewCell()
         }
         
+        // 🧐
         let listItem = listItems![indexPath.item]
         
         cell.titleLabel.text = listItem.title
@@ -118,6 +126,7 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         if let imageUrlString = listItem.imageUrlString {
+            // 🧐
             cell.mainImageView.load(from: URL(string: imageUrlString)!)
         }
         
@@ -126,6 +135,7 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 🧐
         return listItems!.count
     }
     
@@ -133,6 +143,7 @@ class EpisodeListViewController: UIViewController, UITableViewDataSource, UITabl
         let listItem = listItems![indexPath.item]
         let detailViewControllerViewModel = DetailViewControllerViewModel(episodeId: listItem.episode.id)
         let detailViewController = DetailViewController(viewModel: detailViewControllerViewModel)
+        // 🧐
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     

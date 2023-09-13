@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+// 🧐
 class DetailViewControllerViewModel {
     
     var title: AnyPublisher<String?, Never> {
@@ -28,12 +29,15 @@ class DetailViewControllerViewModel {
     
     let imageUrlSubject = CurrentValueSubject<String?, Never>(nil)
     
+    // 🧐
     let fetcher: Fetcher = .shared
     
+    // 🧐
     private var episodeModel: EpisodeModel?
     
     var cancellables: Set<AnyCancellable> = []
     
+    // 🧐
     init(episodeId: Int?) {
         guard let episodeId = episodeId else {
             return

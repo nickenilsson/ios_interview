@@ -10,6 +10,7 @@ import Combine
 
 class DetailViewController: UIViewController {
     
+    // 🧐
     let viewModel: DetailViewControllerViewModel
     
     var cancellables: Set<AnyCancellable> = []
@@ -80,6 +81,7 @@ class DetailViewController: UIViewController {
             scrollView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor)
         ])
         
+        // 🧐
         viewModel.title.sink(receiveValue: { title in
             if let title = title {
                 self.title = title
@@ -87,6 +89,7 @@ class DetailViewController: UIViewController {
         })
         .store(in: &cancellables)
         
+        // 🧐
         viewModel.imageUrl.sink(receiveValue: { imageURLString in
             if let imageURLString = imageURLString, let imageURL = URL(string: imageURLString) {
                 self.imageView.load(from: imageURL)
@@ -95,6 +98,7 @@ class DetailViewController: UIViewController {
         })
         .store(in: &cancellables)
         
+        // 🧐
         viewModel.description.sink(receiveValue: { description in
             if let description = description {
                 self.descriptionLabel.text = description
