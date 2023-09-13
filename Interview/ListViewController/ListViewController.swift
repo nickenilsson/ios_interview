@@ -17,7 +17,7 @@ class ListItem {
         self.episode = episode
     }
     
-    var title: String? { episode.name }
+    var title: String { episode.name! }
     var imageUrl: URL? {
         if let imageUrlString = episode.imageUrl {
             return URL(string: imageUrlString)
@@ -99,9 +99,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         let listItem = listItems[indexPath.item]
-        if let title = listItem.title {
-            cell.titleLabel.text = title
-        }
+        cell.titleLabel.text = listItem.title
         
         if let description = listItem.description {
             cell.descriptionLabel.text = description
